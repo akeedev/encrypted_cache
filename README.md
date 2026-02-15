@@ -31,6 +31,14 @@ uv run mypy src/encrypted_cache/
 uv run ruff check src/ tests/
 ```
 
+### Optional: Pre-push secret scan
+
+```bash
+git config core.hooksPath .githooks
+```
+
+This uses `scripts/pre-push-secret-scan.sh` to scan added lines in commits being pushed for common secret patterns and bank identifiers (IBAN/ISIN). To bypass once, run `SECRET_SCAN_ALLOW=1 git push`.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
