@@ -10,11 +10,11 @@ You are an expert in Python, Unix shell, and in writing scalable software archit
 
 
 ## Workflow
-- We work spec-first. Before implementing, read:
+- We work bottom up and explorative, AI fills in the details. Specs may be written either by me, or summarized by AI based on my explorative structures. Before implementing, read:
   - $PROJECT_DIR$/spec/000-overview.md and spec/010-architecture.md
   - when available the current general feature spec under $PROJECT_DIR$/spec/NNN-*.md (I will name it).
   - or when available the current component feature spec under $PROJECT_DIR$/spec/component/component-NNN-*.md (I will name it).
-  - Specs named `rfeat-NNN-*.md` are features reverse-engineered from existing code (not written upfront).
+  - Specs named `rfeat-NNN-*.md` are features reverse-engineered from existing code (not written upfront, usually written by AI).
 - When drafting a spec, include if useful:
   - A brief target-behavior checklist (what should work when done).
   - Required demo scenarios (e.g., unlock-on-request vs unlock-all).
@@ -27,12 +27,11 @@ You are an expert in Python, Unix shell, and in writing scalable software archit
 - We want the git main branch always to be deployable. Hence, we use GitHub Flow
 - Create a new git branch for each feature, and also when doing bugfixes
 - Commit often, with clear commit messages, but ask me for confirmation.
-- Don't push. I will review your code and merge it into master.
-
+- Don't push. I will review code and merge it into master.
 
 
 ## General
-- The project values clarity over cleverness, optimize for readability and maintainability; aim for clarity and a pleasant reading experience.
+- The project values clarity over cleverness. Thus, optimize for readability and maintainability; aim for clarity and a pleasant reading experience.
 - Prefer small, reviewable, incremental changes. Keep diffs minimal.
 - Do not introduce new dependencies unless necessary.
 - When you need libraries, explain to me and ask me what to use
@@ -84,9 +83,6 @@ You are an expert in Python, Unix shell, and in writing scalable software archit
 
 
 ## Python specifics
-- **`Path.with_suffix()` footgun:** `Path.with_suffix(".ext")` *replaces* the existing suffix, it does
-  not append.  To add a suffix only when none exists, use `if not path.suffix: path = path.with_suffix(...)`.
-  Never silently replace a user-provided file extension.
 - Error handling: fail fast with clear exceptions; use assertions; avoid silent fallbacks.
 - Use try/except only when you can add meaningful context or recovery; otherwise let exceptions propagate.
 - When operations are likely to fail (filesystem, sockets, subprocess), catch and re-raise with additional context using `raise ... from exc`.
@@ -116,10 +112,11 @@ You are an expert in Python, Unix shell, and in writing scalable software archit
 
 
 ## Security
+**Always handle security concerns as critical, especially the following**
 - Never commit secrets to version control
-- Avoid exposing sensitive identifiers (e.g., security hardware IDs, serials, account IDs) in docs, code, tests, or logs.
+- Always avoid exposing sensitive identifiers (e.g., security hardware IDs, serials, account IDs) in docs, code, tests, or logs.
 - Always warn if you notice personal or possibly sensitive information that might be committed (names, emails, device IDs, hostnames, paths, tokens, credentials, internal URLs), and propose safe placeholders before writing or committing.
-- Avoid leaking secrets or sensitive identifiers in logs, errors, docs, or tests; redact when needed.
+- Always avoid leaking secrets or sensitive identifiers in logs, errors, docs, or tests; redact when needed.
 - Treat all external inputs as untrusted; validate/normalize, guard against path traversal, and prefer allowlists.
 - When writing files from user input, sanitize filenames and avoid unsafe paths; use `pathlib` and explicit directories.
 - For secret/config files, use restrictive permissions (e.g., `0o600`) and avoid world-readable temp files.
