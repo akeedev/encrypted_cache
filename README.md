@@ -1,12 +1,13 @@
 # encrypted-cache
 
-> **After cloning**, enable the pre-push secret scanner: `git config core.hooksPath .githooks`
-> This scans pushed commits for accidental secret and bank identifier leaks (IBAN/ISIN).
-
 A Python library for password-based encrypted local caching with TTL-aware cache-or-compute pattern.
 
 Uses Fernet (AES-128-CBC + HMAC-SHA256) with PBKDF2-HMAC-SHA256 key derivation and cleartext metadata envelopes for TTL-based cache invalidation.
 
+> N.B.: **After cloning**, enable the pre-push secret scanner: `git config core.hooksPath .githooks`
+> This scans pushed commits for accidental secret and bank identifier leaks (IBAN/ISIN).
+
+Example usage:
 ```python
 from encrypted_cache import EncryptedCache
 
@@ -18,7 +19,7 @@ def fetch_prices():
 result = cache.execute_cached("api", fetch_prices, "prices/latest", ttl="1 day")
 ```
 
-IMPORTANT: If your notebook should output any sensitive date, make certain to install nbstripout as a commit hook in git so that these secrets do not get archived in git
+IMPORTANT: If your notebook outputs any sensitive date, make certain that nbstripout has been installed as a commit hook in git so that these secrets do not get archived in git (it is enabled by default in this repo and should also be active for clones, but please double-check)
 
 See [doc/encrypted_cache.md](doc/encrypted_cache.md) for full API documentation.
 
