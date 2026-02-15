@@ -33,6 +33,9 @@ output/
 
 # IDE
 .idea/workspace.xml
+
+# Claude Code
+.claude/
 .idea/shelf/
 .idea/httpRequests/
 .idea/dataSources/

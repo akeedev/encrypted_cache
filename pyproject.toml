@@ -3,17 +3,23 @@ name = "encrypted-cache"
 version = "0.1.0"
 description = "Password-based encrypted local cache (Fernet / PBKDF2-HMAC-SHA256) with cleartext metadata envelopes and TTL-based cache invalidation."
 requires-python = ">=3.12.0"
+license = "Apache-2.0"
+authors = [
+    { name = "@drakee" },
+]
 dependencies = [
     "cryptography>=46.0.4",
-    "ipykernel>=7.2.0",
 ]
+
+[project.urls]
+Repository = "https://github.com/akeedev/encrypted-cache"
 
 [dependency-groups]
 dev = [
     "mypy>=1.11",
     "pytest>=9.0",
     "ruff>=0.15",
-    "ipykernel>=7.1.0",
+    "ipykernel>=7.2.0",
 ]
 
 [build-system]

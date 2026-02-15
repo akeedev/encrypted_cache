@@ -7,7 +7,7 @@
 - Source lives in `src/encrypted_cache/core.py`, re-exported via `__init__.py`.
 - Removed dependency on `akepylib` — the `get_path_relative_to_home()` helper was inlined as `_get_path_relative_to_home()`.
 - Logger name changed from `"akepylib.encrypted_cache"` to `"encrypted_cache"`.
-- Repository URL in module docstring updated to `https://github.com/drakee/encrypted-cache`.
+- Repository URL updated to `https://github.com/akeedev/encrypted-cache`.
 - All tests, specs, docs, and notebooks copied and adapted.
 - `py.typed` marker added for mypy compatibility.
 - nbstripout configured for the git commit hook.
@@ -36,8 +36,7 @@ data/                    # gitignored, runtime cache storage
 ```
 
 ## Possible TODOs
-- Publish to PyPI (or a private index) so akepylib and moneymoney-pylib can depend on it without local path references.
+- Publish to PyPI (or a private index) so downstream projects can depend on it without local path references.
 - Add a proper README section on threat model (currently only in the spec).
 - Consider whether `plistlib` serialization should remain the default or if JSON should be offered as an alternative (would remove the macOS-specific dependency for cross-platform use).
 - The nolib notebook (`010_demo_encrypted_cache_1_nolib.ipynb`) still uses a JSON-based inner payload (not plist). Decide whether to align it with the library's plist approach or keep it as a simpler standalone example.
-- No git commits have been made yet in this repo — initial commit pending review.

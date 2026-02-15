@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 @drakee
 """encrypted_cache - encrypt and cache plist-serializable data on disk.
 
@@ -30,7 +30,7 @@ USE AT YOUR OWN RISK.
 Version : 0.2
 Date    : 2026-02-15
 Author  : @drakee
-Repository: https://github.com/drakee/encrypted-cache
+Repository: https://github.com/akeedev/encrypted-cache
 """
 from __future__ import annotations
 

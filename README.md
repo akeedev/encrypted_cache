@@ -1,5 +1,8 @@
 # encrypted-cache
 
+> **After cloning**, enable the pre-push secret scanner: `git config core.hooksPath .githooks`
+> This scans pushed commits for accidental secret and bank identifier leaks (IBAN/ISIN).
+
 A Python library for password-based encrypted local caching with TTL-aware cache-or-compute pattern.
 
 Uses Fernet (AES-128-CBC + HMAC-SHA256) with PBKDF2-HMAC-SHA256 key derivation and cleartext metadata envelopes for TTL-based cache invalidation.
@@ -52,4 +55,4 @@ This uses `scripts/pre-push-secret-scan.sh` to scan added lines in commits being
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Apache 2.0 — see [LICENSE](LICENSE).
