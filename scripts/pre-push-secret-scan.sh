@@ -14,8 +14,8 @@ patterns=(
   'ghp_[A-Za-z0-9]{36}'
   'github_pat_[A-Za-z0-9_]{22,}'
   'xox[baprs]-[A-Za-z0-9-]{10,}'
-  '\bIBAN\b|\b[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}\b'
-  '\bISIN\b|\b[A-Z]{2}[A-Z0-9]{9}[0-9]\b'
+  '\b[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}\b'
+  '\b[A-Z]{2}[A-Z0-9]{9}[0-9]\b'
   '\bBearer[[:space:]]+[A-Za-z0-9._-]{10,}\b'
   'Authorization:[[:space:]]*Bearer[[:space:]]+[A-Za-z0-9._-]{10,}'
 )
