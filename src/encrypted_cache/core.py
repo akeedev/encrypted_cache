@@ -402,7 +402,7 @@ class EncryptedCache:
             payload["comment"] = comment
 
         self._write_secure_json(filepath, payload)
-        logger.info("Saved encrypted cache: %s (key=%s)", filepath, key_name)
+        logger.debug("Saved encrypted cache: %s (key=%s)", filepath, key_name)
         return filepath
 
     def load(self, filepath: Union[str, Path]) -> bytes:
@@ -460,7 +460,7 @@ class EncryptedCache:
             "comment": payload.get("comment"),
             "validasof_datetime": validasof_datetime,
         }
-        logger.info("Loaded cache entry: %s (key=%s)", filepath, key_name)
+        logger.debug("Loaded cache entry: %s (key=%s)", filepath, key_name)
         return data, metadata
 
     def exists(self, filepath: Union[str, Path]) -> bool:
@@ -536,23 +536,23 @@ class EncryptedCache:
                 if self._is_cache_valid(metadata.get("created_at"), effective_ttl):
                     created_at_str = metadata.get("created_at")
                     if oldest_valid_cache_dt is None:
-                        logger.info("Not checking for stale cache entries (oldest_valid_cache_dt is None).")
+                        logger.debug("Not checking for stale cache entries (oldest_valid_cache_dt is None).")
                     if oldest_valid_cache_dt is not None and created_at_str is not None:
                         created_dt = self._parse_datetime(created_at_str, "created_at")
                         nb = oldest_valid_cache_dt if oldest_valid_cache_dt.tzinfo is not None else oldest_valid_cache_dt.replace(tzinfo=timezone.utc)
                         if created_dt < nb:
-                            logger.info("Cache predates oldest_valid_cache_dt (%s) for %s, re-executing", oldest_valid_cache_dt, cache_path)
+                            logger.debug("Cache predates oldest_valid_cache_dt (%s) for %s, re-executing", oldest_valid_cache_dt, cache_path)
                         else:
-                            logger.info("Cache hit for %s", cache_path)
+                            logger.debug("Cache hit for %s", cache_path)
                             return plistlib.loads(data)
                     else:
-                        logger.info("Cache hit for %s", cache_path)
+                        logger.debug("Cache hit for %s", cache_path)
                         return plistlib.loads(data)
                 else:
-                    logger.info("Cache expired for %s, re-executing callback", cache_path)
+                    logger.debug("Cache expired for %s, re-executing callback", cache_path)
 
         if not rerun:
-            logger.info("Cache miss for %s, executing callback", cache_path)
+            logger.debug("Cache miss for %s, executing callback", cache_path)
 
         result = callback()
         self._validate_plist_data(result)
